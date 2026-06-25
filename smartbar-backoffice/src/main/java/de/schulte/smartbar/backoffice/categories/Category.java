@@ -1,9 +1,9 @@
 package de.schulte.smartbar.backoffice.categories;
 
 import de.schulte.smartbar.backoffice.BaseEntity;
-import de.schulte.smartbar.backoffice.MasterDataService;
-import jakarta.enterprise.inject.spi.CDI;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -17,12 +17,5 @@ public class Category extends BaseEntity {
 
     @NotNull
     public String description;
-
-    @PostPersist
-    @PostUpdate
-    @PostRemove
-    public void fireChangedEvent() {
-        CDI.current().select(MasterDataService.class).get().fireChangedEvent(this);
-    }
 
 }
